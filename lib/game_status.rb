@@ -23,9 +23,7 @@ WIN_COMBINATIONS = [
 
 def won?(board)
   if WIN_COMBINATIONS.find do |win_combination|
-      if win_combination.all? do |index|
-        binding.pry
-        board[index] == "X"
+      if win_combination.all? do |index| board[index] == "X"
       end
         return win_combination
       elsif win_combination.all? {|index| board[index] == "O" }
@@ -34,5 +32,47 @@ def won?(board)
     end
   else
     false
+  end
+end
+
+def full?(board)
+  if board.any? { |space| space == " "}
+    return false
+  else
+    return true
+  end
+end
+
+def draw?(board)
+  if won?(board)
+    return false
+  elsif !full?(board)
+    return false
+  else
+    return true
+  end
+end
+
+def over?(board)
+  if won?(board)
+    return true
+  elsif draw?(board)
+    return true
+  else
+    return false
+  end
+end
+
+def winner(board)
+  if WIN_COMBINATIONS.find do |win_combination|
+      if win_combination.all? do |index| board[index] == "X"
+      end
+        return "X"
+      elsif win_combination.all? {|index| board[index] == "O" }
+       return "O"
+      end
+    end
+  else
+    nil
   end
 end
