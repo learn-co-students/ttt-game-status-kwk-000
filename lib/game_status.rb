@@ -20,14 +20,18 @@ WIN_COMBINATIONS = [
 
 
 
+
 def won?(board)
   if WIN_COMBINATIONS.find do |win_combination|
-    if win_combination.all? { board[index] == "X" }
-      return win_combination
-    elsif win_combination.all? { board[index] == "O" }
-      return win_combination
+      if win_combination.all? do |index|
+        binding.pry
+        board[index] == "X"
+      end
+        return win_combination
+      elsif win_combination.all? {|index| board[index] == "O" }
+       return win_combination
+      end
     end
-  end
   else
     false
   end
